@@ -4,43 +4,57 @@
  * @Author: Ankang
  * @Date: 2021-07-20 14:24:12
  * @LastEditors: Ankang
- * @LastEditTime: 2021-07-20 17:39:46
+ * @LastEditTime: 2021-07-20 20:36:50
  */
 
 // lodash，现在通过一个 script 引入
 import _ from 'lodash';
 
-import './style.css'
-
-// import Icon from './icon.png';
-
-// import Notes from './data.csv';
-// import Data from './data.xml';
-
-// import printMe from './print.js';
-
 function component() {
   const element = document.createElement('div');
+  const button = document.createElement('button');
+  const br = document.createElement('br');
 
-  // const btn = document.createElement('button');
+  button.innerHTML = 'Click me and look at the console!';
 
   // lodash（目前通过一个 script 引入）对于执行这一行是必需的
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello')
+  element.appendChild(br);
+  element.appendChild(button);
 
-  // const myIcon = new Image();
-  // myIcon.src = Icon;
-
-  // element.appendChild(myIcon)
-
-  // console.log(Data, Notes);
-
-  // btn.innerHTML = 'Click me and check the console'
-  // btn.onclick = printMe
-
-  // element.appendChild(btn);
+  button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
+    const print = module.default;
+    print();
+  })
 
   return element;
 }
 
 document.body.appendChild(component());
+
+
+// function getComponent() {
+//   // const element = document.createElement('div');
+//   return import('lodash')
+//     .then(({default: _}) => {
+//       const element = document.createElement('div');
+
+//       element.innerHTML = _.join(['Hello', 'webpack'], '');
+
+//       return element;
+//     })
+//     .catch((error) => 'An error occurred while loading the component')
+// }
+
+// async function getComponent() {
+//   const { default: _ } = await import('lodash');
+
+//   const element = document.createElement('div');
+//   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+//   return element
+// }
+
+// getComponent().then((component) => {
+//   document.body.appendChild(component);
+// })

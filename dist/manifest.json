@@ -1,7 +1,0 @@
-{
-  "index.css": "autoindex.css",
-  "index.js": "autoindex.bundle.js",
-  "another.js": "autoanother.bundle.js",
-  "vendors-node_modules_lodash_lodash_js.bundle.js": "autovendors-node_modules_lodash_lodash_js.bundle.js",
-  "index.html": "autoindex.html"
-}
