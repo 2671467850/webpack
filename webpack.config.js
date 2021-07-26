@@ -4,11 +4,12 @@
  * @Author: Ankang
  * @Date: 2021-07-20 15:02:33
  * @LastEditors: Ankang
- * @LastEditTime: 2021-07-20 19:09:10
+ * @LastEditTime: 2021-07-20 20:53:28
  */
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -20,12 +21,16 @@ module.exports = {
     contentBase: './dist',
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Development',
+      title: 'Caching',
     }),
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    runtimeChunk: 'single',
   }
 };
